@@ -1,0 +1,238 @@
+<p>
+  I decided to make a mobile app for a project, and was interested in the
+  options out there for cross-platform development. In particular, I'm
+  interested in minimizing the effort required to maintain it over time and
+  maximizing the amount of code that can be reused across Android, iOS, web,
+  and native solutions.
+</p>
+
+<p>
+  For some background, I was a core engineer working in Amazon and AWS's
+  Builder Tools organization, and helped define and maintain the underlying
+  build infrastructure for projects like Amazon's retail shopping app, its
+  Kindle app, and its Twitch app. Mobile development has not been a career
+  focus of mine, but my work in infrastructure and Amazon's software ecosystem
+  has facilitated faster iteration for apps that you may use in your day-to-day
+  life. I've even spoken at internal conferences in Amazon specifically to
+  demonstrate how to build mobile applications (the Amazon way). In other
+  words, I've got more than a passing acquaintance.
+</p>
+
+<h2>First, some rejects</h2>
+
+<p>
+  My goals may not be your goals, so don't take these suggestions as gospel.
+  I don't have unlimited time or an unlimited budget for engineering talent,
+  I am limiting my investment to just my own spare time. I'm also not doing
+  anything that needs fast-rendering pixel-perfect graphics (Maybe then I'd use
+  <a href='https://love2d.com'>LÖVE</a>).
+</p>
+
+<p>
+  Flutter is an attractive option. I love the Dart programming language and it
+  comes with a large community that's reaching maturity. It also comes with a
+  large package ecosystem with ready-to-go integrations for fiddly things like
+  accepting in-app payments or integrating with advertisers. Those are not
+  clear goals of mine though.
+</p>
+
+<p>
+  Generating a simple "hello world" Flutter app instantly filled me with dread,
+  though. Gradle files, Xcode projects, CMakeLists.txt, and multiple
+  sub-projects for each target. This instantly put Flutter out of reach for me
+  and my smaller-scale ambitions. Each of those build systems to me represent a
+  tower of dependencies and moving parts to keep updated over time, and much of
+  the platform-specific code appears non-trivial. I'm not opposed to the
+  systems (at least, not for the right price), but it's going way over my
+  budget for time and effort, especially over time.
+</p>
+
+<p>
+  React Native is another attractive option, but again, my tolerance for <a
+  href='https://npmgraph.js.org/?q=react-native%2C+react-native-web'>a large
+  tower of dependencies</a> is low. If possible, I only want to have a handful
+  of reasons to require updates. Changes to the OS or the store are impossible
+  to avoid, but changes to (at the time of writing) 536 dependencies are
+  certainly possible to avoid.
+</p>
+
+<p>
+  Other options like Xamarin, Iconic, or Electron are either delivering too few
+  platforms or too many dependencies for my goals. Perhaps in a few years I'll
+  choose <a href='https://tauri.app'>Tauri</a>, but it's not ready for mobile
+  yet.
+</p>
+
+<h2>Fyne, I'll do it already</h2>
+
+<p>
+  I've settled on <a href='https://fyne.io'>Fyne</a> as a framework I can work
+  with. I don't know what the possible lower bounds on minimalism can be in
+  the cross-platform world, but it comes with <a href='https://github.com/fyne-io/fyne/blob/d8e9fe02c9bb9e4b4c42778f5cae8ffcc43f36e2/go.mod'>
+  an order of magnitude fewer dependencies</a> than React Native. In going
+  through a similar "hello world" app, it becomes clear that the amount of code
+  reuse between platforms will be very high. There is no extra build
+  boilerplate like Gradle/Xcode/CMakeLists.txt to maintain. (Again, my goals
+  may not be your goals, some projects will require the level of detail and
+  optimization that can only be achieved with complex build procedures.)
+  As a bonus, the Go programming language has a fantastic track record of
+  backwards compatibility with previous versions of Go.
+</p>
+
+<h2>Minimalist Android Setup</h2>
+
+<p>
+  The rest of this article will be notes on my development setup. As a warning,
+  I prefer to work very minimally and to stick with text interfaces (CLIs, etc)
+  that lend to automation, and I tend to prefer avoiding GUI-based interactions
+  for software development whenever possible. If you're more of a GUI person, I
+  recommend following Fyne's <a href='https://docs.fyne.io/started/'>Getting
+  Started</a> guide.
+</p>
+
+<h3>1. Dev environment</h3>
+
+<p>
+  First I setup a fresh Ubuntu machine specifically for app development. You
+  don't <em>have to</em> do this separation, but with all the fiddliness I've
+  experienced with Android in particular, I want to constrain resources (like
+  disk usage) and avoid interfering unexpectedly with my primary system. I
+  primarily use Void Linux, but there's a little better support for Android
+  specifically from Ubuntu.
+</p>
+
+<p>
+  Originally I was working with Ubuntu in a QEMU VM on a local network host,
+  and was able to get as far as emulation and successfully uploading an APK to
+  a physical android phone. The phone was connected to my laptop via USB, and
+  my laptop connected to the VM over Wi-Fi from a different room while watching
+  a toddler. It's 2024 and it feels like almost anything is possible. The lag
+  on input was bothering me, though, so I changed to Ubuntu on a cheap mini PC
+  running XRDP for a remote connection and it's a lot snappier. I'm not really
+  breaking the bank, just a small machine with about 8GB RAM and lotsa storage.
+</p>
+
+<h3>2. Dev dependencies</h3>
+
+<p>
+  Next I setup the system with Go, GCC, graphics headers, and Go libraries. The
+  initiated are going to understand this means
+  <a href='https://pkg.go.dev/cmd/cgo'>Cgo</a> is in the mix somewhere, and
+  we're not dealing with "pure" Go. Personally I understand this as necessary
+  when developing cross-platform, although I imagine it will change in the next
+  5 to 10 years.
+</p>
+
+<p>
+  Nothing too fancy here for Fyne, I followed the steps from
+  <a href='https://docs.fyne.io/started/#prerequisites'>the getting started guide</a>.
+</p>
+
+<p>
+  I also installed a text editor (helix), an IDE (VS Code), and the Go language
+  server (gopls). I'll use GitHub for controlling revisions of my software over
+  time, so some setup in GitHub and on the machine for git was also performed.
+  How you'll edit code will come down to some personal choices and go beyond
+  the scope of this post.
+</p>
+
+<p>
+  A Java Runtime Environment (JRE) will be required for many of the Android
+  tooling, so I also installed the most recent LTS version of Java using
+  OpenJDK 21's JRE. On Ubuntu, I installed the <code>openjdk-21-jre</code>
+  package with <code>apt</code>. I'll only be using Java for android dev tools
+  and not for compilation or at runtime, so I don't feel the need to get fancy
+  with Temurin or Corretto or some other hardened distribution, or to worry
+  about Java build tools like Gradle/Maven/Bld.
+</p>
+
+<h3>3. Android dependencies</h3>
+
+<p>
+  Here's where I will diverge from the crowd a bit. I start by installing
+  <a href='https://developer.android.com/studio#command-line-tools-only'>
+  command line tools</a> only. This download requires a license agreement,
+  which is a recurring theme with all android tooling, so I did this through a
+  browser to my <code>~/Downloads</code> directory.
+</p>
+
+<pre>
+cd "$HOME/Downloads"
+unzip commandlinetools-linux-*.zip
+./cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android" --install 'cmdline-tools;latest'
+</pre>
+
+<p>
+  Next, I add create an <code>ANDROID_HOME</code> environment variable, and add
+  some android binary directories to my shell's <code>PATH</code>. This will
+  vary by shell, but will look something like this:
+</p>
+
+<pre>
+# Bash
+echo 'export ANDROID_HOME="$HOME/android"' >>~/.bashrc
+echo 'export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"' >>~/.bashrc
+
+# Zsh
+echo 'export ANDROID_HOME="$HOME/android"' >>~/.zshrc
+echo 'export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"' >>~/.zshrc
+
+# Fish
+set -U ANDROID_HOME "$HOME/android"
+set -U fish_user_paths "$ANDROID_HOME/cmdline-tools/latest/bin" "$ANDROID_HOME/platform-tools" $fish_user_paths
+</pre>
+
+<p>
+  Now source the new settings or restart your shell session as necessary.
+</p>
+
+<p>
+  This gets far enough to use <code>sdkmanager</code> to start installing the
+  other required Android dependencies, and accepting yet more licenses.
+</p>
+
+<pre>
+sdkmanager --install ndk-bundle
+sdkmanager --install platform-tools
+</pre>
+
+<p>
+  And, believe it or not that's enough to...
+</p>
+
+<h3>4. Get started building an Android app</h3>
+
+<pre>
+fyne package -os android -appID my.group.MyApp -icon icon.png
+</pre>
+
+<p>
+  That creates an APK, which is the minimal runnable application for Android.
+  To actually run the APK on an android device, you can attach one via USB to
+  your development machine. The device needs to <a href='https://developer.android.com/studio/debug/dev-options'>
+  allow developer options</a> to upload directly from USB, and we can use
+  <code>adb</code> (Android Debug Bridge) from Android's <code>platform-tools</code>
+  package to upload the file.
+</p>
+
+<pre>
+adb attach
+adb install my_app.apk
+</pre>
+
+<p>
+  I'll update later with details on dev workflow and emulation, but if you are
+  a seasoned programmer you may be able to get on from this point.
+</p>
+
+<h3>5. Packaging the Android app for distribution in the Play store</h3>
+
+<p>
+  Coming soon
+</p>
+
+<h2>Minimalist iOS Setup</h2>
+
+<p>
+  Coming soon
+</p>
