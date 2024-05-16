@@ -41,6 +41,7 @@ a {
 
 pre {
     font-family: 'Lucida Console', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+    overflow-x: auto;
 }
 
 .center {
