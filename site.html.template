@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
   <head>
     <title>so.dang.cool :: {{ title }}</title>
-    <meta charset='utf-8' />
+    <meta charset='utf-8'>
     <link rel='stylesheet' href='/style.css'>
 
     <meta property='og:title' content='{{ title }}'>
@@ -12,10 +12,10 @@
     <meta property='og:image:height' content='512'>
 
     <!-- Thanks to https://favicomatic.com -->
-    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-196x196.png' sizes='196x196' />
-    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-32x32.png' sizes='32x32' />
-    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-16x16.png' sizes='16x16' />
-    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-128.png' sizes='128x128' />
+    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-196x196.png' sizes='196x196'>
+    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-32x32.png' sizes='32x32'>
+    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-16x16.png' sizes='16x16'>
+    <link rel='icon' type='image/png' href='https://so.dang.cool/favicon-128.png' sizes='128x128'>
 
     <!-- 'Playfair Display' Font: https://fonts.google.com/specimen/Playfair+Display?category=Serif&sort=popularity -->
     <link rel='preconnect' href='https://fonts.googleapis.com'>
@@ -52,33 +52,31 @@
 
     <hr>
 
-    <footer>
-      <center>
-        <p>
-          2024, J.R. Hill
-        </p>
-        <p>
-          <a href='https://so.dang.cool/'>Home</a> |
-          <a href='https://so.dang.cool/blog/'>Blog</a> |
-          <a href='https://so.dang.cool/blog/feed.xml'>Feed</a>
-        </p>
-        <p><em>
-          Generated with <a href='https://dt.plumbing'">dt</a>
-          (<a href='https://github.com/so-dang-cool/so.dang.cool'>source</a>)
-        </em></p>
-        <a href='https://notbyai.fyi'>
-          <img alt='Produced by humans, not by AI' src='/img/not-by-ai.svg'>
-        </a>
-        <p>
-          <a href='https://github.com/booniepepper'>github</a> |
-          <a href='https://gitlab.com/booniepepper'>gitlab</a> |
-          <a href='https://linkedin.com/in/justinroberthill'>linkedin</a> |
-          <a href='https://booniepepper.itch.io'>itch.io</a> |
-          <a href='https://www.codewars.com/users/booniepepper'>codewars</a> |
-          <a href='https://www.deviantart.com/jrhill/gallery'>deviant art</a> |
-          <a href='https://www.spoonflower.com/profiles/booniepepper'>spoonflower</a>
-        </p>
-      </center>
+    <footer class='center'>
+      <p>
+        2024, J.R. Hill
+      </p>
+      <p>
+        <a href='https://so.dang.cool/'>Home</a> |
+        <a href='https://so.dang.cool/blog/'>Blog</a> |
+        <a href='https://so.dang.cool/blog/feed.xml'>Feed</a>
+      </p>
+      <p><em>
+        Generated with <a href='https://dt.plumbing'>dt</a>
+        (<a href='https://github.com/so-dang-cool/so.dang.cool'>source</a>)
+      </em></p>
+      <a href='https://notbyai.fyi'>
+        <img alt='Produced by humans, not by AI' src='/img/not-by-ai.svg'>
+      </a>
+      <p>
+        <a href='https://github.com/booniepepper'>github</a> |
+        <a href='https://gitlab.com/booniepepper'>gitlab</a> |
+        <a href='https://linkedin.com/in/justinroberthill'>linkedin</a> |
+        <a href='https://booniepepper.itch.io'>itch.io</a> |
+        <a href='https://www.codewars.com/users/booniepepper'>codewars</a> |
+        <a href='https://www.deviantart.com/jrhill/gallery'>deviant art</a> |
+        <a href='https://www.spoonflower.com/profiles/booniepepper'>spoonflower</a>
+      </p>
     </footer>
 
     </div>
