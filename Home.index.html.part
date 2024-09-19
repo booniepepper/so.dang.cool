@@ -14,18 +14,18 @@
 </p>
 
 <ul>
-  <li><a href='/services/'>Services</a></li>
+  <li><a href='/services'>Services</a></li>
 </ul>
 
 <h2>My Stuff</h2>
 
 <ul>
   <li><a href='/blog/'>Blog</a></li>
-  <li><a href='/community.html'>Communities</a></li>
-  <li><a href='/software.html'>Software</a></li>
-  <li><a href='/games.html'>Games</a></li>
-  <li><a href='/other-projects.html'>Other projects</a></li>
-  <li><a href='/about-me.html'>More about me</a></li>
+  <li><a href='/community'>Communities</a></li>
+  <li><a href='/software'>Software</a></li>
+  <li><a href='/games'>Games</a></li>
+  <li><a href='/other-projects'>Other projects</a></li>
+  <li><a href='/about-me'>More about me</a></li>
 </ul>
 
 <h2>Other Stuff</h2>

@@ -24,8 +24,8 @@
     inevitably: a mess of cables and dongles everywhere)
   </li>
   <li>
-    Mac OSX is a development <em>platform</em>, but the target is often either
-	a browser or a Linux container with some level of.
+    Mac OSX is a development <em>platform</em>, but the most common
+    <em>targets</em> seem to be browsers or Linux containers.
   </li>
   <li>
     Some top-20 programming language with a preference this decade for gradual
@@ -65,8 +65,40 @@
 
 <p>
   When I work on a small screen, that sort of project doesn't work very well.
-  This gives me an incentive to simplify.
+  That's part of the plan, though, and gives me <b>an incentive to simplify
+  <em>immediately</em></b> rather than in some speculative clean-up we all
+  agree that we should do in the future.
 </p>
+
+<p>
+  I've hobbied and worked in software for a while, and had the opportunity to
+  work on Amazon's ~20 year accumulation of polyglog libraries, daemons,
+  scripts, and build tools. I can tell you that the statistical probability of
+  actually getting back to that minor refactor we all want to do (but later)
+  is near zero.
+</p>
+
+<p>
+  That said, I can also tell you that <em>valuable</em> code that's simple is
+  an enormous asset, and that <em>valuable</em> code that's complex is a
+  liability. What constitutes value is the subject for some future discussion,
+  but there is a spectrum between the code in that "script I wrote and ran
+  once" and the code running a pacemaker or a car's anti-lock breaking system.
+</p>
+
+<p>
+  I aspire to create software that is particularly valuable. I expect that at
+  the same time, the majority of things that I create will probably be of
+  little value to anyone but myself. In any case, I'm interested in training
+  myself to always create minimal solutions so that when something valuable
+  <em>does</em> get created, it will be an asset rather than a liability.
+</p>
+
+<hr>
+
+<h1>
+  A brief aside on Linux (or BSD, Plan 9, etc)
+</h1>
 
 <p>
   <a href='/bookshelf/In%20the%20Beginning%20was%20the%20Command%20Line%20-%20Neal%20Stephenson.pdf'>
@@ -75,5 +107,57 @@
   tank that you can get for free.
 </p>
 
+<div>
+  <img alt='M1A1 Abrams tank interior' src='../static/m1a1.jpg'>
+</div>
+
+<aside>
+  <em>
+    The interior of an M1A1 Abrams tank. (<a href='https://commons.wikimedia.org/wiki/File:3rd_ID_M1A1_Abrams_TC_and_Gunner_2008.jpg'>Public domain, from wikipedia</a>.)
+  </em>
+</aside>
+
 <p>
-  It's
+  Those who have really "gone to war" in a Linux context, especially systems
+  administrators, "Site Reliability Engineers," "System Development Engineers"
+  and similar, might feel a spiritual connection of sorts with this analogy.
+</p>
+
+<p>
+  I don't know how deeply Stephenson was considering this analogy, but I do
+  have a history enlisting in the USMC and some passing exposure to tanks and
+  tank simulators. They are <em>VERY NOT</em> designed for comfort, beauty, or
+  pleasure. The controls expose everything the vehicle can possibly do. The
+  view to the outside is there, but in ways obstructed to bring focus on what
+  <em>really matters</em> in its context.
+</p>
+
+<p>
+  It's definitely not going to be everyone's preference to have all this
+  control. It's dangerous, with a large capacity
+  (<code>sudo rm -rf /</code>) for destruction.
+</p>
+
+<p>
+  Like Linux exposes you to your machine more than other operating systems,
+  pure text editing exposes you to the essense of the source code. It's
+  interacting with the "everything" of the text. I also believe the limitation
+  in how much can be displayed at once is valuable.
+</p>
+
+<p>
+  IDEs layer on many comforts, and are more pleasant to use. But: the comforts
+  they bring also come packaged with incentives for excess and complexity.
+</p>
+
+<hr>
+
+<p>
+  <em>Update on 2024-09-18:</em> I now work at Furnished Finder and some legacy
+  components have hard requirements on old versions of Visual Studio IDEs. These
+  are valuable components to the company and its users, and so there is a hard
+  requirement to use these IDEs when developing. Newer developments like mono,
+  dotnet core, etc are not compatible, but they generally follow the trends of
+  moving away from IDEs as a dependency. It's also a clear liability to the
+  company that we're working to get away from.
+</p>
