@@ -1,13 +1,7 @@
-name: Render and deploy site content
-
 on:
   push:
-    branches: [core]
-
-  # Allows running the workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -20,46 +14,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Setup mise
-        uses: jdx/mise-action@v2
-
-      - name: Make a git clone
-        run: |-
-          git clone --bare ./.git site.git
-      
-      - name: Generate site with dt scripts
-        run: |-
-          ./gen.dt
-          cd blog
-          ./gen-feed.dt
-
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v1
-        with:
-          mdbook-version: 'latest'
-
-      - name: Run mdBook (thinks)
+      - uses: actions/checkout@v3
+      - uses: actions/configure-pages@v3
+      - uses: jdx/mise-action@v2
+      - run: git clone --bare ./.git site.git
+      - run: ./gen.dt
+      - run: ./gen-feed.dt
+        working-directory: 'blog'
+      - uses: peaceiris/actions-mdbook@v1
+      - run: mdbook build -d '../../thinks/'
         working-directory: './my-books/thinks/'
-        run: |-
-            mdbook build -d '../../thinks/'
-
-      - name: Run mdBook (gigs)
+      - run: mdbook build -d '../../gigs/'
         working-directory: './my-books/gigs/'
-        run: |-
-            mdbook build -d '../../gigs/'
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: '.'
-
-      - name: Deploy to GitHub Pages
+      - uses: actions/upload-pages-artifact@v1
+        with: { path: '.' }
+      - uses: actions/deploy-pages@v2
         id: deployment
-        uses: actions/deploy-pages@v2
